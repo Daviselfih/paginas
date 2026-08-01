@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>animacion lanita del rey</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍒</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="images/image1.jpg">
+  <link rel="preload" as="image" href="images/image2.gif">
+  <link rel="preload" as="image" href="images/image3.gif">
+  <link rel="preload" as="image" href="images/outro.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="loader" class="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <div id="jsi-cherry-container" class="container">
+
+    <div id="intro-btn" class="heart-btn" aria-label="Reproducir" role="button" tabindex="0">
+      <span class="burst-particle" style="--i:0"></span>
+      <span class="burst-particle" style="--i:1"></span>
+      <span class="burst-particle" style="--i:2"></span>
+      <span class="burst-particle" style="--i:3"></span>
+      <span class="burst-particle" style="--i:4"></span>
+      <span class="burst-particle" style="--i:5"></span>
+      <span class="burst-particle" style="--i:6"></span>
+      <span class="burst-particle" style="--i:7"></span>
+      <span class="burst-ring"></span>
+      <svg class="heart" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="cherryGradL" cx="38%" cy="38%" r="55%">
+            <stop offset="0%" stop-color="#ff6b7a"/>
+            <stop offset="55%" stop-color="#e63950"/>
+            <stop offset="100%" stop-color="#9b1b2e"/>
+          </radialGradient>
+          <radialGradient id="cherryGradR" cx="42%" cy="36%" r="55%">
+            <stop offset="0%" stop-color="#ff6b7a"/>
+            <stop offset="55%" stop-color="#e63950"/>
+            <stop offset="100%" stop-color="#9b1b2e"/>
+          </radialGradient>
+          <linearGradient id="stemGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#5a8f3a"/>
+            <stop offset="100%" stop-color="#3d6b28"/>
+          </linearGradient>
+          <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7cb342"/>
+            <stop offset="100%" stop-color="#558b2f"/>
+          </linearGradient>
+        </defs>
+        <path d="M42 48 Q38 28, 48 12" fill="none" stroke="url(#stemGrad)" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M58 48 Q62 28, 52 12" fill="none" stroke="url(#stemGrad)" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M50 14 Q62 8, 72 16 Q62 14, 50 14Z" fill="url(#leafGrad)"/>
+        <path d="M50 14 Q58 12, 68 16" fill="none" stroke="#3d6b28" stroke-width="0.8" opacity="0.5"/>
+        <circle cx="38" cy="68" r="22" fill="url(#cherryGradL)"/>
+        <ellipse cx="30" cy="58" rx="7" ry="5" fill="#fff" opacity="0.22"/>
+        <circle cx="62" cy="68" r="22" fill="url(#cherryGradR)"/>
+        <ellipse cx="54" cy="58" rx="7" ry="5" fill="#fff" opacity="0.22"/>
+      </svg>
+    </div>
+
+    <!-- Banner debajo de la cereza (sound1) -->
+    <div id="intro-banner" class="intro-banner">
+      <div class="intro-banner-inner">
+        <div id="lyrics-1" class="lyrics"></div>
+      </div>
+    </div>
+
+    <audio id="audio-1" preload="auto">
+      <source src="images/sound1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="title-section" class="title-section">
+      <h1 class="title">🍒 Cherry 🍒</h1>
+      <div class="info-box">
+        <div id="lyrics" class="lyrics"></div>
+      </div>
+    </div>
+
+    <div id="outro-overlay" class="outro-overlay">
+      <div class="outro-overlay-inner">
+        <a href="https://www.instagram.com/jdss.av" target="_blank" rel="noopener" class="outro-instagram-link">
+          Apóyame en mi insta <span class="outro-handle">@jdss.av</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+  <script src="ui.js"></script>
+
+</body>
+</html>
