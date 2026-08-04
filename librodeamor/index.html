@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fairy Land - Edgar Allan Poe</title>
+    <meta name="description" content="Fairy Land by Edgar Allan Poe, where butterflies fly up to the skies for tiny pieces of the moon.">
+    <meta name="keywords" content="edgar allan poe, fairy land, gsap, motionpath, scrolltrigger, customEase, lenis">
+  </head>
+  <body>
+
+    <!-- Intro overlay with brown heart -->
+    <div id="introOverlay">
+      <button id="heartBtn" aria-label="Iniciar experiencia">
+        <svg class="heart-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </button>
+      <p class="intro-hint">Toca el corazón</p>
+    </div>
+
+    <audio id="bgSound" src="content/sound.mp3" preload="auto" loop></audio>
+
+    <div id="textBox">
+
+      <h1>Libro de Amor</h1>
+      ¿Qué deseas saber?<br>
+      ¿Qué deseo que sepas?<br><br>
+
+      Necesitarías saber varias cosas,<br>
+      pero no son pretextos.<br>
+      Aunque sepas que no es un libro de amor,<br>
+      aunque veas sus versos tallados en mi corazón,<br>
+      sigue sin ser un libro de amor.<br><br>
+
+      Entonces, ¿qué es?<br><br>
+
+      Podría contarte tanto, tanto de lo que no has escuchado.<br>
+      Dibujarte palabras de mi pensamiento,<br>
+      o mostrarte que las palabras llevan un nombre<br>
+      que no conozco por completo.<br><br>
+
+      No es un libro de amor,<br>
+      sin embargo buscamos más páginas,<br>
+      sin embargo sentimos el calor de la ausencia.<br>
+      El latido de lo que me pidió el alma<br>
+      al escuchar tu nombre.<br>
+      Y aun así no me atrevo a escribir un libro de amor.<br><br>
+
+      Aunque pase sus páginas, aunque conozca su nombre,<br>
+      que las letras tiemblen de mi impulso.<br>
+      Que los punto y final anuncien más capítulos.<br><br>
+
+      Porque el amor se dice sin miedo,<br>
+      pero nuestras palabras le cambian el nombre.<br>
+      Nuestras palabras lo envuelven entre las frases,<br>
+      aunque suene en silencios.<br><br>
+
+      Que a veces sea mejor no decir nada<br>
+      solo es una excusa para no anunciar sus versos.<br><br>
+
+      ¿Si no es un libro de amor,<br>
+      qué es lo que lo sigue escribiendo?<br>
+      En sus versos, en sus párrafos.<br><br>
+
+      Solo hay que hacer una pausa,<br>
+      porque si lees con el alma<br>
+      te das cuenta de lo simple<br>
+      de aquella complejidad.<br>
+      <h2>de mi, para ti</h2>
+
+      <div id="textBoxMargin">
+        <div id="perspectiveBody">
+          <svg version="1.1" id="spiral" viewBox="0 0 250 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <g stroke="none" fill="none">
+              <path id="spiral1" d="M 148 781 76 195" />
+              <path id="spiral2" d="M 193 149 100 818" />
+            </g>
+          </svg>
+
+          <div id="bfw1" class="butterflyWrapper">
+            <svg version="1.1" id="butterfly1" class="butterfly" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <g id="bf1" class="bf">
+                <use class="wing1" href="#wingPath" />
+                <use class="wing2 flipX" href="#wingPath" />
+                <use class="ribs1" href="#ribsPath" />
+                <use class="ribs2 flipX" href="#ribsPath" />
+                <use class="body1" href="#bodyPath" />
+                <use class="body2 flipX" href="#bodyPath" />
+              </g>
+            </svg>
+          </div>
+
+          <div id="bfw2" class="butterflyWrapper">
+            <svg version="1.1" id="butterfly2" class="butterfly" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <g id="bf2" class="bf">
+                <use class="wing1" href="#wingPath" />
+                <use class="wing2 flipX" href="#wingPath" />
+                <use class="ribs1" href="#ribsPath" />
+                <use class="ribs2 flipX" href="#ribsPath" />
+                <use class="body1" href="#bodyPath" />
+                <use class="body2 flipX" href="#bodyPath" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <svg id="noise">
+      <defs>
+        <filter id='noiseFilter'>
+          <feTurbulence type="fractalNoise" baseFrequency="0.6" stitchTiles="stitch" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0" />
+        </filter>
+        <filter id='roughpaper' x='0%' y='0%' width='100%' height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency='0.04' result='noise' numOctaves="5" />
+          <feDiffuseLighting in='noise' lighting-color='#E4CA9F' surfaceScale='2'>
+            <feDistantLight azimuth='45' elevation='60' />
+          </feDiffuseLighting>
+        </filter>
+      </defs>
+      <rect width='100%' height='100%' filter='url(#noiseFilter)'/>
+      <rect x="0" y="0" width="100%" height="100%" filter="url(#roughpaper)" fill="none" opacity="0.4"></rect>
+    </svg>
+
+    <!-- SVG paths and filters -->
+    <svg xmlns="http://www.w3.org/2000/svg" role="none" width="0" height="0" style="position:absolute">
+      <defs>
+        <linearGradient id="wingGrad" x1="0%" x2="100%" y1="0%" y2="0%">
+          <stop offset="0%" stop-color="#FE5914" stop-opacity="0.9" />
+          <stop offset="90%" stop-color="#FEA805" stop-opacity="0.3" />
+        </linearGradient>
+                
+        <linearGradient id="wingGrad2" x1="0%" x2="100%" y1="0%" y2="0%">
+          <stop offset="0" stop-color="#FF2EA9" stop-opacity="0.9" />
+          <stop offset="90%" stop-color="#F983AF" stop-opacity="0.3" />
+        </linearGradient>
+
+        <path id="wingPath" d="M 2 15H 0v 7H 2C 3 43 12 68 26 69 36 70 46 45 49 37 52 27 38 24 31 20c 2 0 17 -2 21 -7 2 -3 13 -50 2 -51C 33 -40 6 -18 2 15Z" />
+        <path id="bodyPath" d="M 13 -24 C 4 -18 2 -4 1 5 H 0 V 43 C 4 43 5 8 2 6 V 4 c 2 -24 10 -24 11 -28   0 0 2 0 1 -1   -1 -1 -1 1 -1 1 z" />
+        <path id="ribsPath" d="M 48 -38C 11 -32 2 11 2 17 3 36 8 66 26 69 36 69 46 44 49 36 51 27 38 24 31 20c 1 0 15 -2 21 -7 2 -4 6 -19 7 -39 -1 -10 -2 -13 -11 -12zm 2 2c 7 0 -19 14 -19 14 0 0 -1 -13 19 -14zm 6 6c 3 8 -14 10 -14 10 3 -6 10 -19 14 -10zm -28 6C 40 -21 4 12 4 12 4 12 17 -27 28 -24Zm 11 -1c 3 2 1 6 1 6 2 0 3 0 4 2 2 5 -23 14 -23 14 0 0 9 -16 18 -22zm 18 5c 0 7 -11 5 -11 5 0 0 11 -14 11 -5zm -4 8c 3 8 -17 6 -17 6 0 0 14 -13 17 -6zm 2 5C 58 2 37 2 37 2 37 2 54 -11 55 -7ZM 3 15C 3 15 29 -12 35 -3 42 9 3 15 3 15ZM 53 5C 52 10 33 6 33 6 33 6 56 -3 53 5Zm -5 6C 45 20 9 16 9 16 9 16 45 2 48 11ZM 6 17C 6 17 41 36 31 42 25 50 6 17 6 17Zm 5 0c 0 0 27 6 26 18 0 4 -26 -18 -26 -18zm -7 1c 0 0 10 7 2 9 -4 1 -2 -9 -2 -9zm 26 4c 0 0 19 7 16 11C 42 39 30 22 30 22ZM 8 29C 8 29 26 39 20 42 14 46 8 29 8 29ZM 5 30C 5 30 18 46 13 49 7 52 5 30 5 30Zm 34 5c 0 0 8 -1 7 3 -3 5 -7 -3 -7 -3zm -6 2c 0 0 13 2 10 7 -2 4 -10 -7 -10 -7zm -18 6c 0 0 13 0 6 8 -5 2 -7 -8 -6 -8zm 7 -1C 22 42 39 55 36 58 33 62 22 42 22 42Zm 9 2c 0 0 17 -2 8 10 -3 4 -8 -10 -8 -10zm -8 6c 0 0 17 10 7 15 -6 5 -7 -15 -7 -15zm 0 13C 16 66 13 51 13 51c 0 0 14 1 10 12z" />  
+      </defs>
+    </svg>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

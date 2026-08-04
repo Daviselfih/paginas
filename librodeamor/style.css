@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Trad:wght@100..400&display=swap');
+
+*, *::before, *::after { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0px;
+}
+
+html, body {
+  min-height: 100%;
+  position: relative;
+  overscroll-behavior: none;
+}
+
+body {
+    --padding: 30px;
+    overflow-x: clip;
+    padding-inline: var(--padding);
+    font-family: "Playwrite US Trad", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #E4CA9F;
+    color: #532c05;
+    text-stroke: 4px #532c0511;
+    -webkit-text-stroke: 4px #532c0511;
+}
+
+body:before {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    content: " ";
+    box-shadow: 0px 0px 120px 80px #1c0f02 inset;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+body:after {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    content: " ";
+    background-image: url("https://picsum.photos/id/1073/1000");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* ========== INTRO OVERLAY ========== */
+#introOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #E4CA9F;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#introOverlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#heartBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.2s ease;
+}
+
+#heartBtn:active {
+    transform: scale(0.92);
+}
+
+.heart-svg {
+    width: 90px;
+    height: 90px;
+    fill: #5c3a1e;
+    filter: drop-shadow(0 4px 12px rgba(83, 44, 5, 0.35));
+    transition: fill 0.3s ease;
+}
+
+#heartBtn:hover .heart-svg {
+    fill: #7a4a28;
+}
+
+.intro-hint {
+    margin-top: 18px;
+    font-size: 15px;
+    color: #532c05;
+    opacity: 0.7;
+    letter-spacing: 0.04em;
+    font-family: "Playwrite US Trad", cursive;
+}
+
+/* Heart pulse animation before click */
+#heartBtn.idle .heart-svg {
+    animation: heartPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+
+/* Click animation */
+#heartBtn.clicked .heart-svg {
+    animation: heartBurst 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes heartBurst {
+    0% { transform: scale(1); opacity: 1; }
+    40% { transform: scale(1.45); opacity: 1; }
+    100% { transform: scale(0.2) translateY(-80px); opacity: 0; }
+}
+
+/* ========== TEXT BOX ========== */
+#textBox {
+    position: relative;
+    z-index: 10;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 550px;
+    margin-inline: auto;
+    padding: 0;
+    padding-right: 100px;
+    overflow: visible;
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+#textBox h1 {
+    margin: 0;
+    padding: 50px 0 20px;
+    font-size: 24px;
+}
+
+#textBox h2 {
+    margin: 0;
+    padding: 20px 0 75px 70px;
+    font-size: 20px;
+}
+
+#textBoxMargin {
+    display: block;
+    width: 250px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+#perspectiveBody {
+    display: block;
+    position: sticky;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100vh;
+    padding-bottom: 10vh;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    overflow: visible;
+}
+
+#perspectiveBody svg#spiral {
+    width: 100%;
+    height: 100%;
+}
+
+/* ========== BUTTERFLIES ========== */
+.butterflyWrapper {
+    --rotateY: 45deg;
+    display: block;
+    width: 40px;
+    height: 40px;
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+    transform-style: preserve-3d;
+}
+
+.butterflyWrapper svg.butterfly {
+    overflow: visible;
+    width: 40px;
+    height: 40px;
+    transform-style: preserve-3d;
+}
+
+.butterflyWrapper svg.butterfly g.bf {
+    transform-style: preserve-3d;
+}
+
+#butterfly1 {
+    transform: scaleX(-1);
+}
+
+/* Body stays fixed — no rotateY */
+.butterflyWrapper svg use.body1,
+.butterflyWrapper svg use.body2 {
+    fill: #532c05;
+    transform: none;
+}
+
+/*
+  Wing path is hinged near x≈0 (left side of the path).
+  Right wing: rotateY around the hinge.
+  Left wing: mirror with scaleX(-1) then same rotateY so both open symmetrically.
+*/
+.butterflyWrapper svg use.wing1,
+.butterflyWrapper svg use.ribs1 {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    transform: rotateY(var(--rotateY));
+}
+
+.butterflyWrapper svg use.wing2,
+.butterflyWrapper svg use.ribs2 {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    transform: scaleX(-1) rotateY(var(--rotateY));
+}
+
+#bf1 use.wing1,
+#bf1 use.wing2 {
+    fill: url(#wingGrad);
+    stroke: none;
+}
+
+#bf1 use.ribs1,
+#bf1 use.ribs2 {
+    fill: #532c05;
+    stroke: none;
+}
+
+#bf2 use.wing1,
+#bf2 use.wing2 {
+    fill: url(#wingGrad2);
+    stroke: none;
+}
+
+#bf2 use.ribs1,
+#bf2 use.ribs2 {
+    fill: #532c05;
+    stroke: none;
+}
+
+svg#noise {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 700px) {
+    body {
+        --padding: 16px;
+    }
+
+    #textBox {
+        max-width: 100%;
+        padding-right: 70px;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    #textBox h1 {
+        font-size: 20px;
+        padding-top: 36px;
+        padding-bottom: 14px;
+    }
+
+    #textBox h2 {
+        font-size: 17px;
+        padding-left: 40px;
+        padding-bottom: 60px;
+    }
+
+    #textBoxMargin {
+        width: 120px;
+    }
+
+    #perspectiveBody {
+        width: 120px;
+    }
+
+    .butterflyWrapper {
+        width: 32px;
+        height: 32px;
+    }
+
+    .butterflyWrapper svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .heart-svg {
+        width: 72px;
+        height: 72px;
+    }
+
+    .intro-hint {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 420px) {
+    body {
+        --padding: 12px;
+    }
+
+    #textBox {
+        padding-right: 55px;
+        font-size: 14px;
+    }
+
+    #textBox h1 {
+        font-size: 18px;
+        padding-top: 28px;
+    }
+
+    #textBox h2 {
+        font-size: 15px;
+        padding-left: 20px;
+        padding-bottom: 50px;
+    }
+
+    #textBoxMargin {
+        width: 90px;
+    }
+
+    #perspectiveBody {
+        width: 90px;
+    }
+
+    .butterflyWrapper {
+        width: 28px;
+        height: 28px;
+    }
+
+    .butterflyWrapper svg {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Prevent scroll while intro is visible */
+body.intro-active {
+    overflow: hidden;
+    height: 100vh;
+}
